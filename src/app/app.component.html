@@ -10,9 +10,42 @@
 
 <div class="courses">
     <!-- track을 추가한 이유? -->
-    @for (course of courses; track $index) {
-        <course-card (courseSelected)="onCourseSelected($event)" [course]="course"></course-card>
+    <!-- count는 interable의 총 개수 -->
+    <!-- 괄호에 변수를 선언해도 되고, property에 $변수를 선언해도 됨 -->
+    <!-- 여기서 나오는 class는 감싸고 있는 컴포넌트이름(course-card)가 됨  -->
+     <!-- 
+    track은 고유한 값이 지정되어야 하는데, 리스트가 업데이트 되었을 시에
+    앵귤러는 이전에 그렸던 리스트와, 새로 들어온 리스트를 비교하여 새로 추가된 요소만
+    dom으로 렌더링하는 방식으로 최적화하기 때문에 필수적으로 넣어줘야 함
+        -->
+    @for (
+        course of courses; track $index; let count = $count;
+        let last = $last; let even = $even; let odd = $odd;
+    ) {
+
+        <course-card 
+            (courseSelected)="onCourseSelected($event)" 
+            [index]="$index"
+            [course]="course"
+            [class.is-first]="$first"
+            [class.is-last]="last"
+            [class.is-even]="even"
+            [class.is-odd]="odd"
+        ></course-card>
     }
+    @empty {
+
+        <h1>No courses found!</h1>
+
+    }
+
+    <!-- 예전 문법 -->
+    <course-card *ngFor="let course of courses; index as i; first as isFirst;"
+        [class.is-first]="isFirst"
+        (courseSelected)="onCourseSelected($event)"
+        [course]="course"
+        [index]="i + 1"
+    ></course-card>
     
 </div>
 
