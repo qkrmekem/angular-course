@@ -27,4 +27,18 @@ export class CourseCardComponent {
     this.courseSelected.emit(this.course);
   }
 
+  isImageVisible(){
+    return this.course && this.course.iconUrl;
+  }
+
+  cardClasses(){
+    if (this.course.category == 'BEGINNER') {
+      return 'beginner';
+    }
+  }
+
+  cardStyles(){
+    return {'background-image': `url(${this.course.iconUrl})`};
+  }
+
 }

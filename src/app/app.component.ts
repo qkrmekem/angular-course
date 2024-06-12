@@ -11,11 +11,15 @@ export class AppComponent {
 
   courses = [...COURSES];
 
-  coreCourse = COURSES[0];
+  title = COURSES[0].description;
 
-  rxjsCourse = COURSES[1];
+  price = 9.9998723;
 
-  ngrxCourse = COURSES[2];
+  rate = 0.78;
+
+  course = COURSES[0];
+
+  startDate = new Date(2000, 0, 1);
 
   onCourseSelected(course: Course){
     console.log('app component', course);
